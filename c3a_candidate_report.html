@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C3A Labs — AI Marketing Lead · Candidate Screening Report</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f5f7;
+    --surface: #ffffff;
+    --surface2: #fafafa;
+    --border: #e5e5ea;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-tertiary: #aeaeb2;
+    --accent: #0071e3;
+    --accent-light: #e8f0fb;
+    --green: #30d158;
+    --green-bg: #e8faf0;
+    --orange: #ff9f0a;
+    --orange-bg: #fff5e0;
+    --red: #ff3b30;
+    --red-bg: #ffedec;
+    --purple: #bf5af2;
+    --purple-bg: #f5ecff;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+    --shadow-lg: 0 12px 32px rgba(0,0,0,0.10), 0 4px 12px rgba(0,0,0,0.06);
+    --radius: 16px;
+    --radius-sm: 10px;
+    --radius-xs: 6px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 0 32px;
+  }
+  .header-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .header-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-mark {
+    width: 28px; height: 28px;
+    background: var(--text-primary);
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  .header-title { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+  .header-sub { font-size: 12px; color: var(--text-secondary); }
+  .header-meta { font-size: 12px; color: var(--text-secondary); font-family: 'DM Mono', monospace; }
+
+  /* ── HERO ── */
+  .hero {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 48px 32px 32px;
+  }
+  .hero-eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .hero-title {
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: -1.2px;
+    line-height: 1.1;
+    color: var(--text-primary);
+    margin-bottom: 14px;
+  }
+  .hero-desc {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 560px;
+    font-weight: 400;
+  }
+
+  /* ── STATS ROW ── */
+  .stats-row {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 32px 40px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 18px 20px;
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -1.5px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  /* ── FILTERS ── */
+  .filter-bar {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 32px 28px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .filter-label { font-size: 13px; color: var(--text-secondary); font-weight: 500; margin-right: 4px; }
+  .filter-btn {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .filter-btn.active {
+    background: var(--text-primary);
+    border-color: var(--text-primary);
+    color: white;
+  }
+
+  /* ── CANDIDATE GRID ── */
+  .candidates-grid {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 32px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* ── TIER LABEL ── */
+  .tier-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0 4px;
+    margin-top: 12px;
+  }
+  .tier-label span {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+  .tier-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── CANDIDATE CARD ── */
+  .candidate-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .candidate-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+  .candidate-card.priority {
+    border-color: transparent;
+    background: var(--surface);
+    box-shadow: 0 0 0 1.5px var(--accent), var(--shadow-md);
+  }
+
+  .card-main {
+    padding: 22px 24px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 18px;
+    align-items: start;
+  }
+
+  /* Score ring */
+  .score-ring {
+    width: 64px; height: 64px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .score-ring svg { transform: rotate(-90deg); }
+  .score-ring circle.track { fill: none; stroke: var(--bg); stroke-width: 5; }
+  .score-ring circle.fill {
+    fill: none;
+    stroke-width: 5;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.8s cubic-bezier(0.4,0,0.2,1);
+  }
+  .score-center {
+    position: absolute;
+    inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+  }
+  .score-num {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1;
+    color: var(--text-primary);
+  }
+  .score-denom { font-size: 9px; color: var(--text-tertiary); font-weight: 500; }
+
+  /* Card info */
+  .card-info { min-width: 0; }
+  .card-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
+  .candidate-name {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color: var(--text-primary);
+  }
+  .decision-badge {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+  .badge-top { background: #fff0e0; color: #b45309; }
+  .badge-strong { background: var(--green-bg); color: #15803d; }
+  .badge-fit { background: var(--accent-light); color: var(--accent); }
+  .badge-borderline { background: var(--orange-bg); color: #b45309; }
+  .badge-notfit { background: var(--red-bg); color: var(--red); }
+  .badge-unscored { background: var(--surface2); color: var(--text-secondary); border: 1px solid var(--border); }
+
+  .card-headline {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .tag {
+    padding: 3px 9px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 11.5px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .card-signal {
+    background: var(--surface2);
+    border-radius: var(--radius-xs);
+    padding: 10px 12px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 16px;
+  }
+  .signal-item { }
+  .signal-key {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 2px;
+  }
+  .signal-val {
+    font-size: 12.5px;
+    color: var(--text-primary);
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  /* Card actions */
+  .card-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: var(--radius-xs);
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+  }
+  .action-btn:hover { background: var(--bg); box-shadow: var(--shadow-sm); }
+  .action-btn.primary {
+    background: var(--text-primary);
+    border-color: var(--text-primary);
+    color: white;
+  }
+  .action-btn.primary:hover { background: #333; }
+  .action-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+  .next-step-pill {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--text-primary);
+    color: white;
+    white-space: nowrap;
+  }
+  .next-step-pill.interview { background: #15803d; }
+  .next-step-pill.reject { background: var(--red); }
+  .next-step-pill.hold { background: var(--orange); }
+
+  /* ── EXPAND ANSWERS ── */
+  .card-expander {
+    border-top: 1px solid var(--border);
+  }
+  .expander-toggle {
+    width: 100%;
+    padding: 12px 24px;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.15s;
+  }
+  .expander-toggle:hover { background: var(--surface2); }
+  .expander-icon { width: 16px; height: 16px; transition: transform 0.25s; }
+  .expander-toggle.open .expander-icon { transform: rotate(180deg); }
+
+  .expander-content {
+    display: none;
+    padding: 0 24px 20px;
+    border-top: 1px solid var(--border);
+  }
+  .expander-content.open { display: block; }
+
+  .qa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+  .qa-item { }
+  .qa-q {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 5px;
+  }
+  .qa-a {
+    font-size: 13px;
+    color: var(--text-primary);
+    line-height: 1.55;
+    font-weight: 400;
+  }
+  .qa-item.full { grid-column: 1 / -1; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 40px 32px;
+    font-size: 12px;
+    color: var(--text-tertiary);
+    border-top: 1px solid var(--border);
+  }
+
+  /* ── HIDDEN CLASS ── */
+  .candidate-section.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-brand">
+      <div class="logo-mark">C3</div>
+      <div>
+        <div class="header-title">C3A Labs · KaraX.ai</div>
+        <div class="header-sub">AI Marketing Lead — Screening Report</div>
+      </div>
+    </div>
+    <div class="header-meta">Report generated May 12, 2026 &nbsp;·&nbsp; 13 candidates</div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Hiring Intelligence</div>
+  <h1 class="hero-title">Candidate Screening<br>Report</h1>
+  <p class="hero-desc">AI-native Marketing Lead role — Full-Time Remote (India) · 5 PM–2 AM IST. 13 applications screened and scored across AI fluency, marketing depth, coding ability, and systems thinking.</p>
+</section>
+
+<!-- STATS -->
+<section class="stats-row">
+  <div class="stat-card">
+    <div class="stat-num" style="color:var(--text-primary)">13</div>
+    <div class="stat-label">Total Applicants</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num" style="color:var(--green)">2</div>
+    <div class="stat-label">Strong Fit</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num" style="color:var(--accent)">3</div>
+    <div class="stat-label">Fit / Interview</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num" style="color:var(--orange)">2</div>
+    <div class="stat-label">Borderline / Hold</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num" style="color:var(--red)">6</div>
+    <div class="stat-label">Not Fit / Reject</div>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-btn active" onclick="filterCards('all', this)">All</button>
+  <button class="filter-btn" onclick="filterCards('strong', this)">Strong Fit</button>
+  <button class="filter-btn" onclick="filterCards('fit', this)">Fit</button>
+  <button class="filter-btn" onclick="filterCards('borderline', this)">Borderline</button>
+  <button class="filter-btn" onclick="filterCards('notfit', this)">Not Fit</button>
+  <button class="filter-btn" onclick="filterCards('unscored', this)">Unscored</button>
+</div>
+
+<!-- CANDIDATES -->
+<main class="candidates-grid">
+
+  <!-- ── TIER 1: STRONG FIT ── -->
+  <div class="tier-label"><span>Tier 1 · Strong Fit — Priority Interview</span><div class="tier-line"></div></div>
+
+  <!-- Subir Roy -->
+  <div class="candidate-section strong" data-tier="strong">
+  <div class="candidate-card priority">
+    <div class="card-main">
+      <div class="score-ring">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <circle class="track" cx="32" cy="32" r="27"/>
+          <circle class="fill" cx="32" cy="32" r="27" stroke="#30d158"
+            stroke-dasharray="169.6"
+            stroke-dashoffset="15.3"/>
+        </svg>
+        <div class="score-center">
+          <div class="score-num">91</div>
+          <div class="score-denom">/100</div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-top">
+          <span class="candidate-name">Subir Roy</span>
+          <span class="decision-badge badge-strong">Strong Fit</span>
+        </div>
+        <div class="card-headline">Growth Marketer · IIM Bangalore MBA · B2B SaaS → Consumer · AI-Native Workflows</div>
+        <div class="card-tags">
+          <span class="tag">Google Ads</span><span class="tag">LinkedIn Ads</span><span class="tag">Clay</span><span class="tag">Instantly</span><span class="tag">Claude MCP</span><span class="tag">Perplexity</span><span class="tag">Notion MCP</span><span class="tag">0→Paying SaaS</span>
+        </div>
+        <div class="card-signal">
+          <div class="signal-item">
+            <div class="signal-key">Primary Fit</div>
+            <div class="signal-val">Growth infra from scratch; paid ads, lead enrichment, landing pages, AI-native automation. Scaled pipeline 3x in 3 months.</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-key">Main Concern</div>
+            <div class="signal-val">Mostly B2B/healthcare SaaS — verify hands-on coding depth and consumer acquisition appetite.</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <span class="next-step-pill interview">Top Priority</span>
+        <a class="action-btn primary" href="https://drive.google.com/file/d/1redKHYSrBPCAK8M3N82X1-oPpH65lOJP/view" target="_blank">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Resume
+        </a>
+        <a class="action-btn" href="https://www.linkedin.com/in/subir-roy-00339369/" target="_blank">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a class="action-btn" href="https://subirsportfolio.lovable.app/" target="_blank">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          Portfolio
+        </a>
+      </div>
+    </div>
+    <div class="card-expander">
+      <button class="expander-toggle" onclick="toggleExpand(this)">
+        View Screening Answers
+        <svg class="expander-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M19 9l-7 7-7-7"/></svg>
+      </button>
+      <div class="expander-content">
+        <div class="qa-grid">
+          <div class="qa-item full">
+            <div class="qa-q">Last AI Task Completed</div>
+            <div class="qa-a">Built Claude Code skills to find relevant jobs based on custom scoring criteria — including company-research, similar-content, create-content, and content-workflow skills. Connected 12+ MCP servers (Notion, Perplexity, Apollo, Firecrawl, HubSpot) for a fully automated competitive intelligence pipeline.</div>
+          </div>
+          <div class="qa-item">
+            <div class="qa-q">Marketing AI Agent Vision</div>
+            <div class="qa-a">End-to-end content creation & distribution agent: market research → benchmarking → draft → repurpose → publish → track. Key metric: pipeline influence and qualified inbound leads.</div>
+          </div>
+          <div class="qa-item">
+            <div class="qa-q">Workflow to Automate</div>
+            <div class="qa-a">Competitive intelligence — weekly scan of competitors' websites, blogs, ads, hiring trends, social channels. Auto-generate battlecards, sales enablement assets, and Slack digests into Notion in real time.</div>
+          </div>
+          <div class="qa-item">
+            <div class="qa-q">Low-Conversion Diagnosis</div>
+            <div class="qa-a">Focus on mid/bottom-funnel: offer strength, copy-to-intent alignment, UX friction, trust/education gap, or wrong audience targeting. Eliminate via heatmaps, session recordings, funnel analytics, CTA engagement.</div>
+          </div>
+          <div class="qa-item">
+            <div class="qa-q">Common Marketing Mistake</div>
+            <div class="qa-a">Hiring marketers without clear ownership, KRAs, or success metrics — causes fragmented execution and inability to compound results. Strong outcomes need clear KPI ownership.</div>
+          </div>
+          <div class="qa-item">
+            <div class="qa-q">Proactive Problem Solved</div>
+            <div class="qa-a">At Blinkit, proactively created a weighted inventory index (vs. simple unit counts) — improved inventory availability 10%+ and enabled 20+ category managers to make better decisions.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Prakhar Tripathi -->
+  <div class="candidate-section strong" data-tier="strong">
+  <div class="candidate-card priority">
+    <div class="card-main">
+      <div class="score-ring">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <circle class="track" cx="32" cy="32" r="27"/>
+          <circle class="fill" cx="32" cy="32" r="27" stroke="#30d158"
+            stroke-dasharray="169.6"
+            stroke-dashoffset="27.1"/>
+        </svg>
+        <div class="score-center">
+          <div class="score-num">84</div>
+          <div class="score-denom">/100</div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-top">
+          <span class="candidate-name">Prakhar Tripathi</span>
+          <span class="decision-badge badge-strong">Strong Fit</span>
+        </div>
+        <div class="card-headline">B2B SaaS Demand Gen / GTM · 6 yrs · Google/LinkedIn/Meta Ads · Salesforce Agentforce</div>
+        <div class="card-tags">
+          <span class="tag">Demand Generation</span><span class="tag">GTM Strategy</span><span class="tag">HubSpot</span><span class="tag">Pardot</span><span class="tag">Salesforce</span><span class="tag">AI Email Warmup</span><span class="tag">Claude Skills</span>
+        </div>
+        <div class="card-signal">
+          <div class="signal-item">
+            <div class="signal-key">Primary Fit</div>
+            <div class="signal-val">6+ yrs SaaS demand gen/GTM; Google/LinkedIn/Meta paid; AI email warmup/custom agents. Generated 30+ SQLs and $250K+ pipeline.</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-key">Main Concern</div>
+            <div class="signal-val">Mostly B2B SaaS; limited explicit B2C/app-store/referral experience. Coding depth needs hands-on validation.</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <span class="next-step-pill interview">Priority Interview</span>
+        <a class="action-btn primary" href="https://drive.google.com/file/d/1UFOlpAeEiREN9C6G4ZxjOqOo8q8NlQln/view" target="_blank">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Resume
+        </a>
+        <a class="action-btn" href="https://www.linkedin.com/in/prakharb2bsaas/" target="_blank">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+    <div class="card-expander">
+      <button class="expander-toggle" onclick="toggleExpand(this)">
+        View Screening Answers
+        <svg class="expander-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M19 9l-7 7-7-7"/></svg>
+      </button>
+      <div class="expander-content">
+        <div class="qa-grid">
+          <div class="qa-item full">
+            <div class="qa-q">Last AI Task Completed</div>
+            <div class="qa-a">Built full GTM positioning, messaging, and campaign structure for RapidClaims.ai (healthcare AI). Used AI as a strategic execution partner — market analysis, ICP refinement, GTM messaging, landing page flows, webinar topics, email campaigns, ad copy. Outcome: significantly faster campaign execution and more scalable content/messaging workflow.</div>
+          </div>
+          <div class="qa-item">
+            <div class="qa-q">AI Process Improvement</div>
+            <div class="qa-a">Competitive analysis beyond speed — identifying positioning gaps, messaging patterns, market narratives at scale. Synthesize recurring themes, uncover whitespace, predict which angles are saturating. Helps teams make sharper positioning decisions.</div>
+          </div>
+          <div class="qa-item">
+            <div class="qa-q">Marketing AI Agent Vision</div>
+            <div class="qa-a">GTM Intelligence & Narrative Agent — analyzes competitor positioning, customer pain points, campaign performance, and sales insights to continuously recommend highest-converting messaging. Key metric: pipeline conversion rate.</div>
+          </div>
+          <div class="qa-item">
+            <div class="qa-q">Low-Conversion Diagnosis</div>
+            <div class="qa-a">Issue is not distribution but relevance, intent alignment, or trust. Ad hook attracting curiosity not intent; LP doesn't match ad promise; generic/feature-heavy value prop; CTA timing mismatch; no trust signals. Analyze bounce rate, session behavior, scroll depth, form drop-offs.</div>
+          </div>
+          <div class="qa-item">
+            <div class="qa-q">Proactive Problem Solved</div>
+            <div class="qa-a">At Accelirate, proactively restructured campaign messaging from technical jargon to pain-point-driven, outcome-focused narratives. Refined webinar narratives, landing pages, email sequences — created clearer differentiation and improved engagement quality from target audience.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- ── TIER 2: FIT ── -->
+  <div class="tier-label"><span>Tier 2 · Fit — Interview</span><div class="tier-line"></div></div>
+
+  <!-- Sulthana Parveen -->
+  <div class="candidate-section fit" data-tier="fit">
+  <div class="candidate-card">
+    <div class="card-main">
+      <div class="score-ring">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <circle class="track" cx="32" cy="32" r="27"/>
+          <circle class="fill" cx="32" cy="32" r="27" stroke="#0071e3"
+            stroke-dasharray="169.6"
+            stroke-dashoffset="30.5"/>
+        </svg>
+        <div class="score-center">
+          <div class="score-num">82</div>
+          <div class="score-denom">/100</div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-top">
+          <span class="candidate-name">Sulthana Parveen</span>
+          <span class="decision-badge badge-fit">Fit</span>
+        </div>
+        <div class="card-headline">Marketing Automation Specialist · ParvinAI Founder · n8n/HubSpot/Google+Meta Ads</div>
+        <div class="card-tags">
+          <span class="tag">Marketing Intelligence Agent</span><span class="tag">n8n</span><span class="tag">Zapier</span><span class="tag">HubSpot</span><span class="tag">Google Ads</span><span class="tag">Meta Ads</span><span class="tag">Python/ML</span><span class="tag">GA4</span>
+        </div>
+        <div class="card-signal">
+          <div class="signal-item">
+            <div class="signal-key">Primary Fit</div>
+            <div class="signal-val">2+ yrs marketing automation; n8n/Zapier, HubSpot, Google/Meta Ads, AI marketing intelligence agent — actually built and deployed one integrating Meta Ads, GA4, HubSpot, WordPress.</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-key">Main Concern</div>
+            <div class="signal-val">Written answers are rough; communication check needed. Experience leans B2B/client work more than consumer app growth.</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <span class="next-step-pill interview">Interview</span>
+        <a class="action-btn primary" href="https://drive.google.com/file/d/1YsnEz_o9Hulc6HEAWbRxcsd28Iwc0v8J/view" target="_blank">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Resume
+        </a>
+        <a class="action-btn" href="https://www.linkedin.com/in/sulthana-parveen-030445190/" target="_blank">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a class="action-btn" href="https://www.Parvinai.com" target="_blank">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          Website
+        </a>
+      </div>
+    </div>
+    <div class="card-expander">
+      <button class="expander-toggle" onclick="toggleExpand(this)">
+        View Screening Answers
+        <svg class="expander-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M19 9l-7 7-7-7"/></svg>
+      </button>
+      <div class="expander-content">
+        <div class="qa-grid">
+          <div class="qa-item full">
+            <div class="qa-q">Last AI Task Completed</div>
+            <div class="qa-a">Built and operates an AI marketing intelligence agent that analyzes performance marketing across integrations: Meta Ads, Google Ads, GA4, HubSpot (CRM), and WordPress (blog). Automates analysis of campaign performance, competitor strategy, and audience segmentation.</div>
+          </div>
+          <div class="qa-item">
+            <div class="qa-q">AI Agents Used</div>
+            <div class="qa-a">Lead Qualification Agent, AI SDR Agent, Customer Support Agent, Workflow Automation Agent, Marketing Reporting Agent, Content Generation Agent, Social Media Automation Agent, CRM Automation Agent, Recruitment Automation Agent, Competitor Research Agent.</div>
+          </div>
+          <div class="qa-item">
+            <div class="qa-q">Proactive Problem Solved</div>
+            <div class="qa-a">While automating with n8n, encountered a broken API node connection. Independently debugged, identified the root cause, and rebuilt the workflow — demonstrating hands-on problem-solving without guidance.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Soumo Deep Nandy -->
+  <div class="candidate-section fit" data-tier="fit">
+  <div class="candidate-card">
+    <div class="card-main">
+      <div class="score-ring">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <circle class="track" cx="32" cy="32" r="27"/>
+          <circle class="fill" cx="32" cy="32" r="27" stroke="#0071e3"
+            stroke-dasharray="169.6"
+            stroke-dashoffset="33.9"/>
+        </svg>
+        <div class="score-center">
+          <div class="score-num">80</div>
+          <div class="score-denom">/100</div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-top">
+          <span class="candidate-name">Soumo Deep Nandy</span>
+          <span class="decision-badge badge-fit">Fit</span>
+        </div>
+        <div class="card-headline">SaaS/AI Growth Leader · 15+ yrs · $0→$1M ARR · 6x ROAS · Maxis AI / FloWorks / YC 2023</div>
+        <div class="card-tags">
+          <span class="tag">GTM Strategy</span><span class="tag">PLG</span><span class="tag">Demand Gen</span><span class="tag">SEO/AEO</span><span class="tag">HubSpot</span><span class="tag">PostHog</span><span class="tag">Lovable</span><span class="tag">LinkedIn Ads</span>
+        </div>
+        <div class="card-signal">
+          <div class="signal-item">
+            <div class="signal-key">Primary Fit</div>
+            <div class="signal-val">Very strong SaaS/AI growth leader; 0-to-1 GTM, paid, SEO/AEO, CRO, PLG, 6x ROAS; built enterprise website in 3 days on Lovable cutting 8-10 week vendor cycle.</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-key">Main Concern</div>
+            <div class="signal-val">Very senior / possibly overqualified for a 2–4 yr IC role. Answers thinner on agent/coding build depth. Compensation fit needs verification.</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <span class="next-step-pill interview">Interview (if scope fits)</span>
+        <a class="action-btn primary" href="https://drive.google.com/file/d/1CGGaYKbF0G5HQAVMXpI07TgFwqgYk-4b/view" target="_blank">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Resume
+        </a>
+        <a class="action-btn" href="https://www.linkedin.com/in/soumodeepnandy/" target="_blank">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+    <div class="card-expander">
+      <button class="expander-toggle" onclick="toggleExpand(this)">
+        View Screening Answers
+        <svg class="expander-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M19 9l-7 7-7-7"/></svg>
+      </button>
+      <div class="expander-content">
+        <div class="qa-grid">
+          <div class="qa-item full">
+            <div class="qa-q">Last AI Task Completed</div>
+            <div class="qa-a">Built an entire enterprise-grade website using Lovable in 3 days — removed 8–10 weeks of vendor cycle at a fraction of the cost. Multiple design options and variations; changes remain streamlined post-launch.</div>
+          </div>
+          <div class="qa-item">
+            <div class="qa-q">Marketing AI Agent Vision</div>
+            <div class="qa-a">Agent to browse and scrape websites, read web content, PDFs, and datasheets, and guide visitors to exactly the information they need without excessive navigation — an always-on intelligent information layer.</div>
+          </div>
+          <div class="qa-item">
+            <div class="qa-q">Low-Conversion Diagnosis</div>
+            <div class="qa-a">CTAs unclear; intent not being captured; friction on form fill page (too many steps); content is informational but not BOFU-targeted. Missing alignment between traffic intent and conversion path.</div>
+          </div>
+          <div class="qa-item">
+            <div class="qa-q">Common Marketing Mistake</div>
+            <div class="qa-a">Generating long-form content via ChatGPT without strategy. Assuming inbound starts from Day 1 and leads will automatically pour in. Short-term tactic-thinking over long-term system building.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Mrinmoy Bhowmick -->
+  <div class="candidate-section fit" data-tier="fit">
+  <div class="candidate-card">
+    <div class="card-main">
+      <div class="score-ring">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <circle class="track" cx="32" cy="32" r="27"/>
+          <circle class="fill" cx="32" cy="32" r="27" stroke="#0071e3"
+            stroke-dasharray="169.6"
+            stroke-dashoffset="40.7"/>
+        </svg>
+        <div class="score-center">
+          <div class="score-num">76</div>
+          <div class="score-denom">/100</div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-top">
+          <span class="candidate-name">Mrinmoy Bhowmick</span>
+          <span class="decision-badge badge-fit">Fit</span>
+        </div>
+        <div class="card-headline">Digital Marketing Professional · 9+ yrs · SEO/AIO/GEO/SXO · Google/Meta/LinkedIn Ads · Australia</div>
+        <div class="card-tags">
+          <span class="tag">Performance Marketing</span><span class="tag">AIO/GEO/SXO</span><span class="tag">SEMrush/Ahrefs</span><span class="tag">Zoho/Salesforce</span><span class="tag">Zapier</span><span class="tag">GA4/Looker</span><span class="tag">Google AI Cert 2026</span>
+        </div>
+        <div class="card-signal">
+          <div class="signal-item">
+            <div class="signal-key">Primary Fit</div>
+            <div class="signal-val">9+ yrs digital marketing; strong AISO/GEO/SXO awareness; paid/SEO/analytics/CRM automation across healthcare and SaaS. Built centralized AI-driven dashboards integrating GA4, Meta, Google Ads, CRM via APIs.</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-key">Main Concern</div>
+            <div class="signal-val">AI-agent/coding depth appears light and generic vs JD. Seniority (9 yrs) may be above the 2–4 yr bracket. Verify he can personally build n8n/API/Python workflows.</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <span class="next-step-pill interview">Interview</span>
+        <a class="action-btn primary" href="https://drive.google.com/file/d/1Q1vTCufO0oiUNemLqC6otl_m4wFreGGe/view" target="_blank">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Resume
+        </a>
+        <a class="action-btn" href="https://www.linkedin.com/in/mrinmoy-bhowmick/" target="_blank">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+    <div class="card-expander">
+      <button class="expander-toggle" onclick="toggleExpand(this)">
+        View Screening Answers
+        <svg class="expander-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M19 9l-7 7-7-7"/></svg>
+      </button>
+      <div class="expander-content">
+        <div class="qa-grid">
+          <div class="qa-item full">
+            <div class="qa-q">Last AI Task Completed</div>
+            <div class="qa-a">At Predicta Analytics, integrated GA4, Meta Ads, Google Ads, and CRM through APIs to build centralized AI-driven dashboards. Automated reporting, generated performance insights faster, and improved campaign optimization with a single source of truth across all marketing channels.</div>
+          </div>
+          <div class="qa-item">
+            <div class="qa-q">Marketing AI Agent Vision</div>
+            <div class="qa-a">Real-time campaign optimization across paid media — analyzing audience behavior, creative performance, funnel drop-offs, and budget allocation continuously. Key metric: profitable customer acquisition (CPA + ROAS + lead quality combined, not individual vanity metrics).</div>
+          </div>
+          <div class="qa-item">
+            <div class="qa-q">Proactive Problem Solved</div>
+            <div class="qa-a">Noticed high lead volume but poor quality and inconsistent reporting. Without being assigned, audited the funnel, restructured audience targeting, improved lead qualification flow, and built centralized CRM-integrated reporting. Result: improved lead quality, clearer decision-making, more efficient and scalable campaigns.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- ── TIER 3: BORDERLINE ── -->
+  <div class="tier-label"><span>Tier 3 · Borderline — Hold</span><div class="tier-line"></div></div>
+
+  <!-- Hally Sam -->
+  <div class="candidate-section borderline" data-tier="borderline">
+  <div class="candidate-card">
+    <div class="card-main">
+      <div class="score-ring">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <circle class="track" cx="32" cy="32" r="27"/>
+          <circle class="fill" cx="32" cy="32" r="27" stroke="#ff9f0a"
+            stroke-dasharray="169.6"
+            stroke-dashoffset="64.4"/>
+        </svg>
+        <div class="score-center">
+          <div class="score-num">62</div>
+          <div class="score-denom">/100</div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-top">
+          <span class="candidate-name">Hally Sam</span>
+          <span class="decision-badge badge-borderline">Borderline</span>
+        </div>
+        <div class="card-headline">Full-Stack Developer & AI Solutions Architect · Lagos, Nigeria · n8n/RAG/LangChain · E-commerce</div>
+        <div class="card-tags">
+          <span class="tag">n8n</span><span class="tag">LangChain</span><span class="tag">CrewAI</span><span class="tag">Flowise</span><span class="tag">RAG</span><span class="tag">Zapier</span><span class="tag">Shopify</span><span class="tag">AI Bots</span>
+        </div>
+        <div class="card-signal">
+          <div class="signal-item">
+            <div class="signal-key">Primary Fit</div>
+            <div class="signal-val">Strong technical/AI automation profile: full-stack, n8n/Zapier, RAG, bots, outreach automation. Extensive agent toolkit (CrewAI, LangGraph, MetaGPT, AutoGPT, Playwright, etc.).</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-key">Main Concern</div>
+            <div class="signal-val">Marketing resume is thin and self-reported. Little paid acquisition/consumer growth ownership. Answers broad rather than quantified. Location/hours fit unclear (Lagos, Nigeria).</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <span class="next-step-pill hold">Hold / Technical Screen</span>
+        <a class="action-btn primary" href="https://drive.google.com/file/d/1OJ_o4QmmFNnRjWs1pdE7Dltg8d0p35Jz/view" target="_blank">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Resume
+        </a>
+        <a class="action-btn" href="https://hallysam.gt.tc/" target="_blank">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          Portfolio
+        </a>
+      </div>
+    </div>
+    <div class="card-expander">
+      <button class="expander-toggle" onclick="toggleExpand(this)">
+        View Screening Answers
+        <svg class="expander-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M19 9l-7 7-7-7"/></svg>
+      </button>
+      <div class="expander-content">
+        <div class="qa-grid">
+          <div class="qa-item full">
+            <div class="qa-q">Last AI Task Completed</div>
+            <div class="qa-a">Built automated customer support workflow for an e-commerce brand: GPT-based agents + API integrations handling inquiries, personalized responses, order tracking, and case escalation. Reduced response time by 70%+ and significantly improved support efficiency.</div>
+          </div>
+          <div class="qa-item">
+            <div class="qa-q">AI Agents Used</div>
+            <div class="qa-a">Claude Skills, OpenAI GPTs, AutoGPT, LangChain, CrewAI, Open Interpreter, Devin AI, Cursor AI Agent, Replit AI Agent, n8n AI Agents, Zapier AI, Flowise AI, LangGraph, MetaGPT, BabyAGI, Microsoft Copilot Agents, Semantic Kernel, AI Browser Agents, Multi-Agent RAG Systems, Voice AI Agents, Telegram/Discord AI Agents, Web Automation Agents.</div>
+          </div>
+          <div class="qa-item">
+            <div class="qa-q">Proactive Problem Solved</div>
+            <div class="qa-a">Freelance client's support and lead management was entirely manual — losing leads, late responses, hours wasted. Though hired only for backend dev, independently proposed and built an AI-powered automation: categorized leads, generated personalized first responses, assigned priority scores, synced to CRM, triggered follow-ups. Client later expanded role to AI workflow consulting.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Pranav Panicker -->
+  <div class="candidate-section borderline" data-tier="borderline">
+  <div class="candidate-card">
+    <div class="card-main">
+      <div class="score-ring">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <circle class="track" cx="32" cy="32" r="27"/>
+          <circle class="fill" cx="32" cy="32" r="27" stroke="#ff9f0a"
+            stroke-dasharray="169.6"
+            stroke-dashoffset="71.2"/>
+        </svg>
+        <div class="score-center">
+          <div class="score-num">58</div>
+          <div class="score-denom">/100</div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-top">
+          <span class="candidate-name">Pranav Panicker</span>
+          <span class="decision-badge badge-borderline">Borderline</span>
+        </div>
+        <div class="card-headline">Freelance Creative Director & Strategist · 5+ yrs · Social Media / Meta Ads / Jolly Motors +66% Growth</div>
+        <div class="card-tags">
+          <span class="tag">Meta Ads</span><span class="tag">Google Analytics</span><span class="tag">SEO/SEM</span><span class="tag">Canva AI</span><span class="tag">Adobe Firefly</span><span class="tag">Runway ML</span><span class="tag">Brand Strategy</span>
+        </div>
+        <div class="card-signal">
+          <div class="signal-item">
+            <div class="signal-key">Primary Fit</div>
+            <div class="signal-val">5+ yrs creative/social marketing; Meta Ads, SEO/SEM, Google Analytics; delivered 66% follower growth at Jolly Motors in 6 months.</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-key">Main Concern</div>
+            <div class="signal-val">Answers are generic on AI/agents/automation — no clear coding evidence. Resume is creative-led, not AI-native growth. Low priority unless more candidates are needed.</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <span class="next-step-pill hold">Hold / Low Priority</span>
+        <a class="action-btn primary" href="https://drive.google.com/file/d/1wLA7B6UecEi2WlhCyPoPlZpXI8BiOvBV/view" target="_blank">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Resume
+        </a>
+        <a class="action-btn" href="https://drive.google.com/drive/folders/1b4ggnrN_LtEz1RWltV3OSbuR_qI8tmki" target="_blank">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          Portfolio
+        </a>
+      </div>
+    </div>
+    <div class="card-expander">
+      <button class="expander-toggle" onclick="toggleExpand(this)">
+        View Screening Answers
+        <svg class="expander-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M19 9l-7 7-7-7"/></svg>
+      </button>
+      <div class="expander-content">
+        <div class="qa-grid">
+          <div class="qa-item full">
+            <div class="qa-q">Last AI Task Completed</div>
+            <div class="qa-a">Built a sales funnel to improve the sales lifecycle for a customer using Zapier for automation.</div>
+          </div>
+          <div class="qa-item">
+            <div class="qa-q">AI Process Improvement</div>
+            <div class="qa-a">Content Creation: AI can ideate concepts aligned with trends and generate multiple creative options for iteration and refinement.</div>
+          </div>
+          <div class="qa-item">
+            <div class="qa-q">Proactive Problem Solved</div>
+            <div class="qa-a">At Jolly Motors, noticed stagnant social media engagement. Without assignment, analyzed audience behavior, content performance, and competitor strategies, then restructured content approach with trend-driven reels, storytelling, and targeted campaigns — resulting in 66% growth in social media presence within 6 months.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- ── TIER 4: NOT FIT ── -->
+  <div class="tier-label"><span>Tier 4 · Not Fit — Reject</span><div class="tier-line"></div></div>
+
+  <!-- Vivek Pathak -->
+  <div class="candidate-section notfit" data-tier="notfit">
+  <div class="candidate-card">
+    <div class="card-main">
+      <div class="score-ring">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <circle class="track" cx="32" cy="32" r="27"/>
+          <circle class="fill" cx="32" cy="32" r="27" stroke="#ff3b30"
+            stroke-dasharray="169.6"
+            stroke-dashoffset="74.6"/>
+        </svg>
+        <div class="score-center">
+          <div class="score-num">56</div>
+          <div class="score-denom">/100</div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-top">
+          <span class="candidate-name">Vivek Pathak</span>
+          <span class="decision-badge badge-notfit">Not Fit</span>
+        </div>
+        <div class="card-headline">BCA Data Science · Bluestock Fintech · AutoStream AI Agent · Groq LLaMA 3.3 / FastAPI · Pune</div>
+        <div class="card-tags">
+          <span class="tag">Python/ML</span><span class="tag">FastAPI</span><span class="tag">LLM Integration</span><span class="tag">Power BI</span><span class="tag">PostgreSQL</span><span class="tag">LangChain basics</span>
+        </div>
+        <div class="card-signal">
+          <div class="signal-item">
+            <div class="signal-key">Primary Fit</div>
+            <div class="signal-val">Strong coding and built AI social-to-lead agent with FastAPI/LLMs. Good technical automation signal.</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-key">Main Concern</div>
+            <div class="signal-val">Resume targets data science/AI roles — lacks marketing ownership, paid channels, consumer acquisition, and brand/content execution. Consider only for a technical automation builder role under marketing.</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <span class="next-step-pill reject">Reject for This Role</span>
+        <a class="action-btn primary" href="https://drive.google.com/file/d/1hxyt9Ey2OzC76tpJYaSMvVzlxk4NML5P/view" target="_blank">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Resume
+        </a>
+        <a class="action-btn" href="https://portfolio-3te8.onrender.com/" target="_blank">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          Portfolio
+        </a>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Aneesh Mishra -->
+  <div class="candidate-section notfit" data-tier="notfit">
+  <div class="candidate-card">
+    <div class="card-main">
+      <div class="score-ring">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <circle class="track" cx="32" cy="32" r="27"/>
+          <circle class="fill" cx="32" cy="32" r="27" stroke="#ff3b30"
+            stroke-dasharray="169.6"
+            stroke-dashoffset="76.3"/>
+        </svg>
+        <div class="score-center">
+          <div class="score-num">55</div>
+          <div class="score-denom">/100</div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-top">
+          <span class="candidate-name">Aneesh Mishra</span>
+          <span class="decision-badge badge-notfit">Not Fit</span>
+        </div>
+        <div class="card-headline">Python/Backend Engineer · FastAPI/Django/RAG · AI Voice Interviewer · Curlscape Solutions</div>
+        <div class="card-tags">
+          <span class="tag">FastAPI</span><span class="tag">RAG/pgvector</span><span class="tag">OpenAI/Gemini</span><span class="tag">Playwright Testing</span><span class="tag">LLM Integration</span><span class="tag">GCP</span>
+        </div>
+        <div class="card-signal">
+          <div class="signal-item">
+            <div class="signal-key">Primary Fit</div>
+            <div class="signal-val">Strong backend/AI engineer: Python, JS, RAG pipelines, AI agents, and testing automation. Built Claude custom skills for server error log monitoring and Slack posting.</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-key">Main Concern</div>
+            <div class="signal-val">No meaningful digital marketing/growth/acquisition experience. Answers are mostly technical; marketing understanding is shallow. Better fit: AI automation engineer, not marketing manager.</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <span class="next-step-pill reject">Reject for This Role</span>
+        <a class="action-btn primary" href="https://drive.google.com/file/d/1_GvK8sCBVit3zJPja37YpjZZbxTtXho2/view" target="_blank">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Resume
+        </a>
+        <a class="action-btn" href="https://www.linkedin.com/in/aneesh-mishra-2737241a9/" target="_blank">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Nandini Singh -->
+  <div class="candidate-section notfit" data-tier="notfit">
+  <div class="candidate-card">
+    <div class="card-main">
+      <div class="score-ring">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <circle class="track" cx="32" cy="32" r="27"/>
+          <circle class="fill" cx="32" cy="32" r="27" stroke="#ff3b30"
+            stroke-dasharray="169.6"
+            stroke-dashoffset="84.8"/>
+        </svg>
+        <div class="score-center">
+          <div class="score-num">50</div>
+          <div class="score-denom">/100</div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-top">
+          <span class="candidate-name">Nandini Singh</span>
+          <span class="decision-badge badge-notfit">Not Fit</span>
+        </div>
+        <div class="card-headline">BCA Data Science · Python/Power BI/ML · Bluestock Fintech · Google Cloud ADK · Pune</div>
+        <div class="card-tags">
+          <span class="tag">Python/ML</span><span class="tag">Power BI/DAX</span><span class="tag">Google Cloud ADK</span><span class="tag">Flask</span><span class="tag">NLP/TF-IDF</span><span class="tag">PostgreSQL</span>
+        </div>
+        <div class="card-signal">
+          <div class="signal-item">
+            <div class="signal-key">Primary Fit</div>
+            <div class="signal-val">Strong Python/BI/ML analytics and Google Cloud ADK exposure; thoughtful, well-articulated AI answers.</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-key">Main Concern</div>
+            <div class="signal-val">Student profile — no B2C growth, no paid acquisition, no content/social ownership, no marketing track record. Could fit analytics/AI intern role, not AI-native marketing lead.</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <span class="next-step-pill reject">Reject</span>
+        <a class="action-btn primary" href="https://drive.google.com/file/d/1NUcuAuR5MeDoZ5w63_K_mZYc1cI2hGbW/view" target="_blank">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Resume
+        </a>
+        <a class="action-btn" href="https://www.linkedin.com/in/nandini-singh-bb180a307" target="_blank">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Karan Samvedi -->
+  <div class="candidate-section notfit" data-tier="notfit">
+  <div class="candidate-card">
+    <div class="card-main">
+      <div class="score-ring">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <circle class="track" cx="32" cy="32" r="27"/>
+          <circle class="fill" cx="32" cy="32" r="27" stroke="#ff3b30"
+            stroke-dasharray="169.6"
+            stroke-dashoffset="93.3"/>
+        </svg>
+        <div class="score-center">
+          <div class="score-num">45</div>
+          <div class="score-denom">/100</div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-top">
+          <span class="candidate-name">Karan Samvedi</span>
+          <span class="decision-badge badge-notfit">Not Fit</span>
+        </div>
+        <div class="card-headline">Growth Marketing Strategist · 12 yrs · Bajaj Finance / Dr Batra's / REDTAG · Pune</div>
+        <div class="card-tags">
+          <span class="tag">Lifecycle Marketing</span><span class="tag">App Engagement</span><span class="tag">SEO</span><span class="tag">Campaign Analytics</span><span class="tag">GenAI</span><span class="tag">Claude Code</span>
+        </div>
+        <div class="card-signal">
+          <div class="signal-item">
+            <div class="signal-key">Primary Fit</div>
+            <div class="signal-val">12 yrs marketing and growth across fintech/healthcare/ecommerce; app engagement and campaign analytics. Improved Bajaj Finance app engagement 11% QoQ.</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-key">Main Concern</div>
+            <div class="signal-val">Declined to answer most screening questions ("I'd love to dive deeper IF shortlisted"). Zero AI-native or coding evidence despite strong resume. This fails the role's explicit do-not-apply criteria.</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <span class="next-step-pill reject">Reject</span>
+        <a class="action-btn primary" href="https://drive.google.com/file/d/1HIL6usgAiekNvtIgVUarACtu-Fhd3GQ8/view" target="_blank">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Resume
+        </a>
+        <a class="action-btn" href="https://www.linkedin.com/in/karansamvedi" target="_blank">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- ── TIER 5: UNSCORED ── -->
+  <div class="tier-label"><span>Tier 5 · Unscored — Pending Review</span><div class="tier-line"></div></div>
+
+  <!-- Dyal Swaroop -->
+  <div class="candidate-section unscored" data-tier="unscored">
+  <div class="candidate-card">
+    <div class="card-main">
+      <div class="score-ring">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <circle class="track" cx="32" cy="32" r="27"/>
+          <circle class="fill" cx="32" cy="32" r="27" stroke="#aeaeb2"
+            stroke-dasharray="169.6"
+            stroke-dashoffset="84.8"/>
+        </svg>
+        <div class="score-center">
+          <div class="score-num" style="font-size:13px; color:var(--text-tertiary)">N/A</div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-top">
+          <span class="candidate-name">Dyal Swaroop</span>
+          <span class="decision-badge badge-unscored">Unscored</span>
+        </div>
+        <div class="card-headline">Growth & Social Media Strategist · MCA · The Healing Groove · 9.7K IG · AI Content Automation</div>
+        <div class="card-tags">
+          <span class="tag">Social Media Strategy</span><span class="tag">Meta Ads (Basic)</span><span class="tag">Canva AI</span><span class="tag">ChatGPT/Claude/Gemini</span><span class="tag">LinkedIn Sales Nav</span><span class="tag">Power BI</span>
+        </div>
+        <div class="card-signal">
+          <div class="signal-item">
+            <div class="signal-key">Signals</div>
+            <div class="signal-val">Content, social media, and lead generation focused. Built content funnels for a wellness startup. Mentions AI workflow automation but no specific agent/coding evidence.</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-key">Key Question</div>
+            <div class="signal-val">Likely leans more toward Borderline/Not Fit — no paid acquisition depth, no coding, and AI usage appears surface-level (content tool use only).</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <span class="next-step-pill" style="background:var(--text-tertiary)">Pending Score</span>
+        <a class="action-btn primary" href="https://drive.google.com/file/d/19H8WgFh1sSs6VA2TbOSdKNKNkgQyPuP3/view" target="_blank">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Resume
+        </a>
+        <a class="action-btn" href="https://www.linkedin.com/in/dyal-thakur/" target="_blank">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a class="action-btn" href="https://dyalthakur.vercel.app/" target="_blank">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          Portfolio
+        </a>
+      </div>
+    </div>
+    <div class="card-expander">
+      <button class="expander-toggle" onclick="toggleExpand(this)">
+        View Screening Answers
+        <svg class="expander-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M19 9l-7 7-7-7"/></svg>
+      </button>
+      <div class="expander-content">
+        <div class="qa-grid">
+          <div class="qa-item full">
+            <div class="qa-q">Last AI Task Completed</div>
+            <div class="qa-a">Built a full content and lead-generation workflow for a wellness startup using AI tools: audience research, content angles, ad copy, funnel structure, email sequences, and performance analysis. Refined manually for brand positioning. Result: faster execution, stronger engagement, improved lead quality.</div>
+          </div>
+          <div class="qa-item">
+            <div class="qa-q">Marketing AI Agent Vision</div>
+            <div class="qa-a">Audience-behavior-driven content optimization agent: analyzes user engagement across platforms and auto-generates high-retention content ideas, hooks, CTAs, and distribution timing. Key metric: conversion-qualified engagement (not views or likes).</div>
+          </div>
+          <div class="qa-item">
+            <div class="qa-q">Proactive Problem Solved</div>
+            <div class="qa-a">Working on a startup's content and growth strategy, noticed high engagement but no structured system converting attention into leads. Independently designed a funnel: content hooks → lead magnets → landing pages → AI-assisted email follow-ups. Improved lead capture efficiency and created measurable marketing process.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Ben Murphy -->
+  <div class="candidate-section unscored" data-tier="unscored">
+  <div class="candidate-card">
+    <div class="card-main">
+      <div class="score-ring">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <circle class="track" cx="32" cy="32" r="27"/>
+          <circle class="fill" cx="32" cy="32" r="27" stroke="#aeaeb2"
+            stroke-dasharray="169.6"
+            stroke-dashoffset="169.6"/>
+        </svg>
+        <div class="score-center">
+          <div class="score-num" style="font-size:13px; color:var(--text-tertiary)">N/A</div>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="card-top">
+          <span class="candidate-name">Ben Murphy</span>
+          <span class="decision-badge badge-unscored">Unscored</span>
+        </div>
+        <div class="card-headline">9th Grade Student · Tri-County RVTHS Franklin MA · Beginner HTML/CSS/JS · Web Development Learner</div>
+        <div class="card-tags">
+          <span class="tag">Basic HTML/CSS</span><span class="tag">Beginner JavaScript</span><span class="tag">Self-Learning</span>
+        </div>
+        <div class="card-signal">
+          <div class="signal-item">
+            <div class="signal-key">Assessment</div>
+            <div class="signal-val">Clear reject. 9th grade student with basic HTML/CSS skills. Expected graduation 2029. No marketing, AI, or professional experience whatsoever.</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-key">Note</div>
+            <div class="signal-val">Should not have passed initial filters. May have applied accidentally or misread the role scope. Recommend a friendly decline.</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <span class="next-step-pill reject">Clear Reject</span>
+        <a class="action-btn primary" href="https://drive.google.com/file/d/1uvsBSBWehGrtOB-C3HIGNrE-XO28CPl5/view" target="_blank">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          Resume
+        </a>
+        <a class="action-btn" href="https://www.linkedin.com/in/ben-murphy-04a41440a" target="_blank">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+  </div>
+
+</main>
+
+<footer>
+  <div style="margin-bottom:6px; font-weight:600; color:var(--text-secondary);">C3A Labs · KaraX.ai · AI Marketing Lead Screening</div>
+  <div>All 13 applications reviewed as of May 12, 2026 · Subir Roy and Prakhar Tripathi identified as top priority candidates</div>
+  <div style="margin-top:4px; font-family:'DM Mono', monospace;">Screening by Satyam Singh · c3alabs.com</div>
+</footer>
+
+<script>
+function toggleExpand(btn) {
+  const content = btn.nextElementSibling;
+  btn.classList.toggle('open');
+  content.classList.toggle('open');
+}
+
+function filterCards(tier, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  document.querySelectorAll('.candidate-section').forEach(section => {
+    if (tier === 'all') {
+      section.classList.remove('hidden');
+    } else {
+      const sectionTier = section.getAttribute('data-tier');
+      section.classList.toggle('hidden', sectionTier !== tier);
+    }
+  });
+
+  // Show/hide tier labels
+  document.querySelectorAll('.tier-label').forEach(label => {
+    if (tier === 'all') {
+      label.style.display = '';
+    } else {
+      label.style.display = 'none';
+    }
+  });
+}
+</script>
+
+</body>
+</html>
